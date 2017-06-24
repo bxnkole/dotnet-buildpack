@@ -22,13 +22,15 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
 
 SRC_DIR=`mktemp -d`
+echo "${SRC_DIR}"
 # Move the app source code into temporary src dir using subshell to not leak shopt
 (
 	shopt -s dotglob
-	mv ${BUILD_DIR}/* ${SRC_DIR}
-	ls ${SRC_DIR}
+	echo "Moving items from ${BUILD_DIR} to ${SRC_DIR}"
+	mv ${BUILD_DIR}/* ${SRC_DIR}	
 )
 
+ls ${SRC_DIR}
 mkdir -p ${CACHE_DIR}
 mkdir -p ${BUILD_DIR}/.profile.d
 DEPLOYMENT_FILE_LOCATION=${SRC_DIR}/.deployment
